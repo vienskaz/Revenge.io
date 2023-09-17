@@ -1,0 +1,13 @@
+{% load static %}
+<li>
+  <article class="item">
+          <img src="{{ item.image.url }}" alt="{{ item.name }}">
+          <div class="post__content">
+              <h3>{{item.name}}</h3>
+              <p> 
+                  {{item.price}}
+              </p>
+          </div>
+      </a>
+  </article>
+</li>
