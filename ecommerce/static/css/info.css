@@ -1,0 +1,27 @@
+.headers{
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 25px;
+  font-weight: 500;
+}
+
+p{
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 14px;
+}
+ul{
+  list-style-type: disc;
+}
+
+li{
+  font-family: 'Roboto Condensed', sans-serif;
+  text-align: justify;
+  font-size: 14px;
+
+}
+
+#info-container{
+  margin-top: 50px;
+  margin-left:100px;
+  margin-bottom:30px;
+  padding-right: 100px;
+}

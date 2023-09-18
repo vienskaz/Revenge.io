@@ -1,0 +1,15 @@
+{% extends 'store/main.html' %}
+{% load static %}
+
+{% block style%}
+<link rel="stylesheet" href="{% static 'css/media.css' %}">
+{% endblock %}
+
+{% block content %}
+<div id="photos">
+  <img src="{% static 'images/media1.png' %}" alt="Image 1" style="display: block; margin: 0 auto;">
+  <img src="{% static 'images/media2.png' %}" alt="Image 2" style="display: block; margin: 0 auto;">
+  <img src="{% static 'images/media3.png' %}" alt="Image 2" style="display: block; margin: 0 auto;">
+</div>
+
+{% endblock %}

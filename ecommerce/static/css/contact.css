@@ -1,0 +1,20 @@
+.title {
+  font-family: 'Roboto Condensed', sans-serif;
+  color: black;
+  font-weight: bold;
+  font-size: 14px;
+  text-align: center;
+}
+
+.small {
+  font-family: 'Roboto Condensed', sans-serif;
+  color: black;
+  font-size: 14px;
+  text-align: center;
+}
+
+#contact-container {
+  margin-top: 100px; 
+  margin-bottom: 130px; 
+  text-align: center;
+}
