@@ -1,19 +1,89 @@
-#div-logo{
-  text-align: center
+.up-container {
+  display: flex;
+  justify-content: space-between; /* Space between logo and icons */
+  align-items: center;
+  margin-bottom: 20px; /* Add margin to separate the logo and navbar */
 }
 
+#div-logo {
+  text-align: center;
+  flex-grow: 1; 
+}
 
-#icons i {
-  float: right; /* Floats the icons to the right within the container */
+#icons {
+  display: flex;
+  align-items: center; 
+  justify-content: flex-end;
+ 
 }
 
 i {
-  display: flex;
-  justify-content: flex-end; /* Aligns the icons to the right */
-  margin-right: 20px;
-  margin-left: 10px;
+  font-size: 20px;
   padding-right: 10px;
-  font-size: 50px;
+  padding-left: 10px;
+}
 
 
+#div-logo img {
+  max-width: 100%; 
+}
+
+.bot-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bot-icons {
+  display: flex;
+  align-items: center;
+  font-family: 'Roboto Condensed', sans-serif;
+  color: black;
+  height: 40px; 
+}
+
+.bot-icons i {
+  margin-right: 10px;
+}
+
+a {
+  font-family: 'Roboto Condensed', sans-serif;
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+  margin-left: 20px;
+}
+
+p {
+  margin: 0;
+}
+
+#emailsub{
+  margin-left: 30px;
+  display: flex; 
+}
+
+#member-button {
+  font-family: 'Roboto Condensed', sans-serif;
+  color: white;
+  font-size: 12px;
+  background-color: black;
+  border: none;
+  flex: 1; 
+  margin: 0; 
+  padding: 7px 5px; 
+}
+
+#member-button {
+  margin-left: -1px; 
+}
+
+.topnav {
+  margin-right: 100px;
+  text-align: center; 
+}
+
+
+.topnav a {
+  font-size: 22px;
 }
