@@ -2,9 +2,9 @@
 <link rel="stylesheet" href="{% static 'css/item.css' %}">
 
 <article class="item">
-    <img src="{{ item.image.url }}" alt="{{ item.name }}">
+    <a href="{% url 'item-detail-page' slug=item.slug %}"><img src="{{ item.image.url }}" alt="{{ item.name }}"></a>
     <div class="item__content">
-        <h3>{{ item.name }}</h3>
+        <h3><a href="{% url 'item-detail-page' slug=item.slug %}">{{ item.name }}</a></h3>
         <p>{{ item.price }}&#36;</p>
     </div>
 </article>

@@ -1,8 +1,8 @@
 .up-container {
   display: flex;
-  justify-content: space-between; /* Space between logo and icons */
+  justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px; /* Add margin to separate the logo and navbar */
+  margin-bottom: 20px; 
 }
 
 #div-logo {
@@ -31,19 +31,32 @@ i {
 .bot-container {
   display: flex;
   justify-content: center;
-  align-items: center;
+  margin-bottom: 10px;
+ 
+}
+
+#emailsub{
+  display: flex;
+  justify-content: center;
+  padding-bottom: 5px;
+  align-items: right;
+  
 }
 
 .bot-icons {
   display: flex;
   align-items: center;
+  font-weight: bold;
   font-family: 'Roboto Condensed', sans-serif;
   color: black;
-  height: 40px; 
+  font-size: 14px;
+  margin-right: 600px;
 }
 
 .bot-icons i {
-  margin-right: 10px;
+  margin-right: 5px;
+  margin-left: 5px;
+  padding: 0;
 }
 
 a {
@@ -75,7 +88,9 @@ p {
 }
 
 #member-button {
-  margin-left: -1px; 
+  margin-left: -1px;
+  padding-left: 15px;
+  padding-right: 15px; 
 }
 
 .topnav {
@@ -85,5 +100,10 @@ p {
 
 
 .topnav a {
-  font-size: 22px;
+  font-size: 18px;
+}
+
+input{
+  height: 50px;
+  width: 300px;
 }

@@ -17,3 +17,17 @@
 .item img {
   max-width: 100%; 
 }
+
+.item:hover img {
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.item:hover h3 {
+  text-decoration: underline;
+  cursor: pointer;
+}
+img{
+  width: 255;
+  height: 270;
+}

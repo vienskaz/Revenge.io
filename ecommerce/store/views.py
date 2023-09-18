@@ -26,3 +26,15 @@ class SingleItem(View):
     item=Item.objects.get(slug=slug)
     context={"item":item}
     return render(request, "store/item-detail.html", context)
+  
+class Media(View):
+    def get(self, request):
+      return render(request, "store/media.html", {})
+
+class Info(View):
+    def get(self, request):
+      return render(request, "store/info.html", {})
+    
+class Contact(View):
+    def get(self, request):
+      return render(request, "store/contact.html", {})

@@ -10,6 +10,9 @@
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <link rel="stylesheet" href="{% static 'css/main.css' %}">
+  {% block style %}
+  
+  {% endblock %}
   <script src="https://kit.fontawesome.com/ed28b86559.js" crossorigin="anonymous"></script>
   <title>Revenge.io</title>
 </head>
@@ -17,7 +20,10 @@
 
   <div class="up-container">
     <div id="div-logo">
-      <img class="jslazyautosizesls-is-cachedlazyloaded" src="//revenge.io/cdn/shop/files/arch-logo-chrome-large_47b3aa28-043e-4543-8bf8-8faac8b3d9ba_x300.gif?v=1678489818" data-aspectratio="1.155688622754491" data-sizes="auto" alt="Revenge Official" width="300" height="auto" data-srcset="//revenge.io/cdn/shop/files/arch-logo-chrome-large_47b3aa28-043e-4543-8bf8-8faac8b3d9ba_180x.gif?v=1678489818 180w, //revenge.io/cdn/shop/files/arch-logo-chrome-large_47b3aa28-043e-4543-8bf8-8faac8b3d9ba_360x.gif?v=1678489818 360w, //revenge.io/cdn/shop/files/arch-logo-chrome-large_47b3aa28-043e-4543-8bf8-8faac8b3d9ba_540x.gif?v=1678489818 540w, //revenge.io/cdn/shop/files/arch-logo-chrome-large_47b3aa28-043e-4543-8bf8-8faac8b3d9ba_720x.gif?v=1678489818 720w, //revenge.io/cdn/shop/files/arch-logo-chrome-large_47b3aa28-043e-4543-8bf8-8faac8b3d9ba_900x.gif?v=1678489818 900w, //revenge.io/cdn/shop/files/arch-logo-chrome-large_47b3aa28-043e-4543-8bf8-8faac8b3d9ba_1080x.gif?v=1678489818 1080w, //revenge.io/cdn/shop/files/arch-logo-chrome-large_47b3aa28-043e-4543-8bf8-8faac8b3d9ba_1296x.gif?v=1678489818 1296w, //revenge.io/cdn/shop/files/arch-logo-chrome-large_47b3aa28-043e-4543-8bf8-8faac8b3d9ba_1512x.gif?v=1678489818 1512w, //revenge.io/cdn/shop/files/arch-logo-chrome-large_47b3aa28-043e-4543-8bf8-8faac8b3d9ba_1728x.gif?v=1678489818 1728w, //revenge.io/cdn/shop/files/arch-logo-chrome-large_47b3aa28-043e-4543-8bf8-8faac8b3d9ba_2048x.gif?v=1678489818 2048w" sizes="263px">
+      <a href="{% url 'store' %}"> <img class="jslazyautosizesls-is-cachedlazyloaded" 
+        src="//revenge.io/cdn/shop/files/arch-logo-chrome-large_47b3aa28-043e-4543-8bf8-8faac8b3d9ba_x300.gif?v=1678489818" 
+        data-aspectratio="1.155688622754491" data-sizes="auto" alt="Revenge Official" width="300" height="auto" 
+        data-srcset="//revenge.io/cdn/shop/files/arch-logo-chrome-large_47b3aa28-043e-4543-8bf8-8faac8b3d9ba_180x.gif?v=1678489818 180w, //revenge.io/cdn/shop/files/arch-logo-chrome-large_47b3aa28-043e-4543-8bf8-8faac8b3d9ba_360x.gif?v=1678489818 360w, //revenge.io/cdn/shop/files/arch-logo-chrome-large_47b3aa28-043e-4543-8bf8-8faac8b3d9ba_540x.gif?v=1678489818 540w, //revenge.io/cdn/shop/files/arch-logo-chrome-large_47b3aa28-043e-4543-8bf8-8faac8b3d9ba_720x.gif?v=1678489818 720w, //revenge.io/cdn/shop/files/arch-logo-chrome-large_47b3aa28-043e-4543-8bf8-8faac8b3d9ba_900x.gif?v=1678489818 900w, //revenge.io/cdn/shop/files/arch-logo-chrome-large_47b3aa28-043e-4543-8bf8-8faac8b3d9ba_1080x.gif?v=1678489818 1080w, //revenge.io/cdn/shop/files/arch-logo-chrome-large_47b3aa28-043e-4543-8bf8-8faac8b3d9ba_1296x.gif?v=1678489818 1296w, //revenge.io/cdn/shop/files/arch-logo-chrome-large_47b3aa28-043e-4543-8bf8-8faac8b3d9ba_1512x.gif?v=1678489818 1512w, //revenge.io/cdn/shop/files/arch-logo-chrome-large_47b3aa28-043e-4543-8bf8-8faac8b3d9ba_1728x.gif?v=1678489818 1728w, //revenge.io/cdn/shop/files/arch-logo-chrome-large_47b3aa28-043e-4543-8bf8-8faac8b3d9ba_2048x.gif?v=1678489818 2048w" sizes="263px"></a>
     </div>
   
     <div id="icons">
@@ -26,8 +32,8 @@
     </div>
   </div>
   <div class="topnav">
-    <a class="active" href="">Shop</a>
-    <a href="">Media</a>
+    <a class="active_shop" href="{% url 'store' %}">SHOP</a>
+    <a class="active_media" href="{% url 'media' %}">MEDIA</a>
   </div>
   
   <div class="container">
@@ -39,14 +45,14 @@
   <footer>
     <div class="bot-container">
       <div class="bot-icons">
-        <i class="fa-brands fa-twitter" style="color: #000000;"></i>
-        <i class="fa-brands fa-instagram" style="color: #000000;"></i>
-        <p><a href="">Info</a></p>
-        <p><a href="">Contact</a></p>
+        <a href="https://www.instagram.com/revenge/" target="_blank"><i class="fa-brands fa-twitter" style="color: #000000; font-size: 26px;"></i></a>
+        <a href="https://twitter.com/garetterevenge" target="_blank"><i class="fa-brands fa-instagram" style="color: #000000; font-size: 26px;"></i></a>
+        <p><a href="{% url 'info' %}">INFO</a></p>
+        <p><a href="{% url 'contact' %}">CONTACT</a></p>
       </div>
 
       <div id="emailsub">
-        <input type="email" placeholder="Email address">
+        <input type="email" placeholder="    Email address">
         <button id="member-button">BECOME A MEMBER</button>
       </div>
     </div>
