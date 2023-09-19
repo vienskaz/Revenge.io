@@ -1,3 +1,47 @@
 {% extends 'store/main.html' %}
 {% load static %}
 
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/none_page_marker.css' %}">
+<link rel="stylesheet" href="{% static 'css/item-detail.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="grid-wrapper">
+  <div class="image">
+    <img src="{{ item.image.url }}" alt="{{ item.name }}" id="image-item">
+  </div>
+  <div class="description">
+    <h2 class="item-name">{{ item.name }}</h2>
+    <p class="item-price">{{ item.price }}&#36;</p>
+    <p class="shipping"><span class="shipping-text">Shipping</span> calculated at checkout.</p>
+    <div class="description-text">
+      <p class="bold-header">{{ item.name }}</p>
+      <br>
+      <p><pre class="standard">{{ item.description }}</pre></p>
+    </div>
+
+    <div class="care">
+      <p class="bold-header">Care instructions</p>
+      <br>
+      <p><pre class="standard">{{ item.care_instructions }}</pre></p>
+    </div>
+
+    <div class="disclaimer">
+      <h3>DISCLAIMER:</h3>
+      <p class="gray">Kindly note that these garments are garment-dyed, which may result in slight irregularities in color and texture.
+        Such variations are a normal and inherent characteristic of the dyeing process, adding uniqueness to each piece</p>
+    </div>
+    <br>
+    <div class="attention">
+      <h3>ATTENTION INTERNATIONAL CUSTOMERS:</h3>
+      <p class="gray">Please note that you are responsible for any customs fees or duties charged by your country for imports.
+        The amount may vary, so we recommend checking your country's policies before making a purchase. Thank you.</p>
+    </div>
+  </div>
+</div>
+
+<div id="buttonholder">
+  <a href="{% url 'store' %}" class="back-link"><button id="back"><span class="arrow">&#129024;</span>&nbsp; &nbsp;BACK TO SHOP</button></a>
+</div>
+{% endblock %}

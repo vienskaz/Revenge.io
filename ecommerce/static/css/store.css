@@ -1,5 +1,13 @@
+.row{
+  margin-left: 50px;
+}
+
 .active_shop{
   
   border-bottom: 1px solid #000;
   
 }
+.container{
+  margin-top: 150px;
+}
+
