@@ -52,8 +52,11 @@
       </div>
 
       <div id="emailsub">
-        <input type="email" placeholder="    Email address">
+        <form id="newsletter" method="POST">
+          {% csrf_token %}
+        <input action="/" id="newsletterinput" name="customer_posted" type="email" placeholder="Email address">
         <button id="member-button">BECOME A MEMBER</button>
+        <form>
       </div>
     </div>
   </footer>

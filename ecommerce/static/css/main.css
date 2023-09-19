@@ -108,3 +108,11 @@ input{
   height: 50px;
   width: 300px;
 }
+
+#newsletter{
+  display: flex; 
+ 
+}
+#newsletterinput{
+  padding-left: 20px;
+}

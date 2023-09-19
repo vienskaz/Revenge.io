@@ -1,13 +1,35 @@
 from django.shortcuts import render
 from django.views.generic import ListView
 from django.views import View
-from .models import Item
+from .models import *
+from django.http import HttpResponseRedirect
+from .forms import *
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
 # Create your views here.
 
 class Store(ListView):
   model = Item
   template_name = "store/store.html"
   context_object_name = "all_items"
+
+  def post(self, request):
+    entered_email = request.POST.get('customer_posted', '').strip()
+
+    if not entered_email:
+        return HttpResponseRedirect("/")
+    try:
+        validate_email(entered_email)
+    except ValidationError:
+        return HttpResponseRedirect("/")
+
+    if NewsletterUser.objects.filter(email=entered_email).exists():
+        return HttpResponseRedirect("/")
+
+    newsletteruser = NewsletterUser(email=entered_email)
+    newsletteruser.save()
+
+    return HttpResponseRedirect("/")
 
   
 class Cart(ListView):

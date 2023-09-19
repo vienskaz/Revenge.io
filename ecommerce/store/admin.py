@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Item
+from .models import *
 
 class ItemAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
@@ -16,3 +16,5 @@ class ItemAdmin(admin.ModelAdmin):
     formatted_care_instructions.allow_tags = True
     formatted_care_instructions.short_description = 'Care Instructions'
 admin.site.register(Item,ItemAdmin)
+admin.site.register(NewsletterUser)
+
