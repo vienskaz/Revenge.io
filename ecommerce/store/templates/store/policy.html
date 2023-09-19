@@ -1,0 +1,27 @@
+{% extends 'store/main.html' %}
+{% load static %}
+
+{% block style%}
+<link rel="stylesheet" href="{% static 'css/info.css' %}">
+<link rel="stylesheet" href="{% static 'css/policy.css' %}">
+{% endblock %}
+
+{% block content %}
+
+  
+  <section id="policy">
+
+    <h1 class="headers" style="font: 20px; padding-left: 100px;" >Shipping policy</h1>
+    <div class="contetnpolicy">
+    <h1 class="headers" style="font: 20px;">SHIPPING & RETURNS</h1>
+    <br>
+    <p class="policy-text">No returns/refunds/exchanges. All sales are final.<br>
+      <br>
+      Please be aware that all shipping outside of the United States may be<br>
+      subject to Customs Fee’s at the Receivers Expense.<br>
+      <br>
+      All customers agree to pay in full for all items before shipment is<br>received.</p><br>
+    </div>
+  </section>
+
+{% endblock %}

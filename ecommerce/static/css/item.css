@@ -35,5 +35,6 @@ a {
 #name {
   font-family: 'Roboto Condensed', sans-serif;
   font-size: 14px;
-  margin-top: 0; 
+  margin-top: 10px; 
+  font-weight: 400;
 }

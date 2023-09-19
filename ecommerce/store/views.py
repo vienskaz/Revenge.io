@@ -38,3 +38,7 @@ class Info(View):
 class Contact(View):
     def get(self, request):
       return render(request, "store/contact.html", {})
+    
+class Policy(View):
+    def get(self, request):
+      return render(request, "store/policy.html", {})

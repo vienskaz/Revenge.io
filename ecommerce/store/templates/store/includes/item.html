@@ -4,7 +4,7 @@
 <article class="item">
     <a href="{% url 'item-detail-page' slug=item.slug %}"><img src="{{ item.image.url }}" alt="{{ item.name }}"></a>
     <div class="item__content">
-        <p><a id="name" href="{% url 'item-detail-page' slug=item.slug %}">{{ item.name }}</a></p>
+        <p id="name"><a id="name" href="{% url 'item-detail-page' slug=item.slug %}">{{ item.name }}</a></p>
         <p>{{ item.price }}&#36;</p>
     </div>
 </article>

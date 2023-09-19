@@ -9,5 +9,6 @@ urlpatterns = [
   path('<slug:slug>', views.SingleItem.as_view(), name="item-detail-page"),
   path('pages/lookbook/', views.Media.as_view(), name='media'),
   path('pages/info', views.Info.as_view(), name='info'),
-  path('pages/contact', views.Contact.as_view(), name='contact')
+  path('pages/contact', views.Contact.as_view(), name='contact'),
+  path('policies/shipping-policy', views.Policy.as_view(), name='policy')
 ]

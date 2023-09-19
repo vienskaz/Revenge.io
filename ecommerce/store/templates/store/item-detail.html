@@ -14,7 +14,7 @@
   <div class="description">
     <h2 class="item-name">{{ item.name }}</h2>
     <p class="item-price">{{ item.price }}&#36;</p>
-    <p class="shipping"><span class="shipping-text">Shipping</span> calculated at checkout.</p>
+    <p class="shipping"><a href="{% url 'policy' %}" class="shipping-text">Shipping</a> calculated at checkout.</p>
     <div class="description-text">
       <p class="bold-header">{{ item.name }}</p>
       <br>
