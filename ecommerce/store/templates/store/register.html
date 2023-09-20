@@ -1,0 +1,26 @@
+{% extends 'store/main.html' %}
+{% load static %}
+
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/none_page_marker.css' %}">
+<link rel="stylesheet" href="{% static 'css/register.css' %}">
+{% endblock %}
+
+
+{% block content %}
+<form method="POST">
+  {% csrf_token %}
+  <label for="first_name">First Name</label>
+  <input action="/" class="registerinput" name="first_name" type="text" >
+  <label for="last_name">Last Name</label>
+  <input action="/" class="registerinput" name="last_name" type="text" >
+  <label for="email">Email</label>
+  <input action="/" class="registerinput" name="email" type="email" >
+  <label for="password">Password</label>
+  <input action="/" class="registerinput" name="password" type="password">
+  <button>create</button>
+</form>
+
+
+{% endblock %}

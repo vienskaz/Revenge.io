@@ -6,6 +6,10 @@ from django.http import HttpResponseRedirect
 from .forms import *
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
+from django.shortcuts import redirect
 # Create your views here.
 
 class Store(ListView):
@@ -64,3 +68,52 @@ class Contact(View):
 class Policy(View):
     def get(self, request):
       return render(request, "store/policy.html", {})
+    
+
+
+def login_view(request):
+    if request.method == 'POST':
+        email = request.POST['email']
+        password = request.POST['password']
+        user = authenticate(request, email=email, password=password)
+        
+        if user is not None:
+            login(request, user)
+            print('Logowanie udane')
+            return redirect('store')
+        else:
+            print("Logowanie nieudane")
+            return redirect('login')
+
+    return render(request, 'store/login.html')
+
+def register_view(request):
+    if request.method == "POST":
+        form = CustomRegistrationForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password']
+            first_name = form.cleaned_data['first_name']
+            last_name = form.cleaned_data['last_name']
+            
+            # Tworzenie użytkownika i zapis do bazy danych
+            user = User.objects.create_user(
+                email=email,
+                password=password,
+                first_name=first_name,
+                last_name=last_name,
+            )
+            
+            # Autentykacja i logowanie użytkownika
+            user = authenticate(request, email=email, password=password)
+            if user is not None:
+                login(request, user)
+                print('Rejestracja i logowanie udane')
+                return redirect('store')
+            else:
+               print('nieudane')
+
+    else:
+        form = CustomRegistrationForm()  # Wyświetl pusty formularz rejestracji
+
+    return render(request, "store/register.html", {'form': form})

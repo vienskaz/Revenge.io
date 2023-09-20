@@ -17,4 +17,8 @@ class ItemAdmin(admin.ModelAdmin):
     formatted_care_instructions.short_description = 'Care Instructions'
 admin.site.register(Item,ItemAdmin)
 admin.site.register(NewsletterUser)
+admin.site.register(User)
+admin.site.register(Address)
+admin.site.register(Order)
+admin.site.register(OrderItem)
 

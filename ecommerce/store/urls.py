@@ -10,5 +10,7 @@ urlpatterns = [
   path('pages/lookbook/', views.Media.as_view(), name='media'),
   path('pages/info', views.Info.as_view(), name='info'),
   path('pages/contact', views.Contact.as_view(), name='contact'),
-  path('policies/shipping-policy', views.Policy.as_view(), name='policy')
+  path('policies/shipping-policy', views.Policy.as_view(), name='policy'),
+  path('account/register', views.register_view, name="register"),
+   path('account/login', views.login_view, name="login")
 ]
