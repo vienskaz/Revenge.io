@@ -1,10 +1,9 @@
 from typing import Any
 from django.db import models
-from django.contrib.auth.models import UserManager, AbstractBaseUser, PermissionsMixin
 from django.utils import timezone
-from django.core.validators import MinLengthValidator
 from django.core.validators import RegexValidator
-from .forms import CustomRegistrationForm 
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
 # Create your models here.
 
 class Item(models.Model):
@@ -25,27 +24,6 @@ class NewsletterUser(models.Model):
   def __str__(self):
     return f'{self.email}' 
 
-
-class CustomUserManager(UserManager):
-  def _create_user(self,email,password,**extra_fields):
-    if not email:
-      raise ValueError("E-mail is invaild")
-    email=self.normalize_email(email)
-    user=self.model(email=email,**extra_fields)
-    user.set_password(password)
-    user.save(using=self.db)
-    return user
-  
-  def create_user(self, email=None,password=None,**extra_fields):
-    extra_fields.setdefault('is_staff', False)
-    extra_fields.setdefault('is_superuser', False)
-    return self._create_user(email,password, **extra_fields)
-  
-  def create_superuser(self, email=None,password=None,**extra_fields):
-    extra_fields.setdefault('is_staff', True)
-    extra_fields.setdefault('is_superuser', True)
-    return self._create_user(email,password, **extra_fields)
-  
 
     
 class Address(models.Model):
@@ -69,43 +47,15 @@ class Address(models.Model):
         verbose_name_plural = 'Addresses'
 
 
-class User(AbstractBaseUser, PermissionsMixin):
-    email = models.EmailField(unique=True)
-    first_name = models.CharField(max_length=50,null=False)
-    last_name = models.CharField(max_length=50, null=False)
-    addres = models.ManyToManyField(Address ,blank=True)
-    is_active = models.BooleanField(default=True)
-    is_superuser = models.BooleanField(default=False)
-    is_staff = models.BooleanField(default=False)
-
+class Customer(models.Model):
+    user= models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+    address = models.ManyToManyField(Address ,blank=True)
+    email=models.EmailField(unique=True,default="", blank=True)
+    first_name=models.CharField(max_length=50,default="")
+    last_name=models.CharField(max_length=50,default="")
     date_joined = models.DateTimeField(default=timezone.now)
     last_login = models.DateTimeField(blank=True, null=True)
 
-    objects = CustomUserManager()
-    USERNAME_FIELD = 'email'
-    EMAIL_FIELD = 'email'
-    REQUIRED_FIELDS = []
-
-    groups = models.ManyToManyField(
-        'auth.Group',
-        related_name='custom_users',  # Add a related_name to resolve the clash
-        blank=True,
-        verbose_name='groups',
-    )
-    
-    user_permissions = models.ManyToManyField(
-        'auth.Permission',
-        related_name='custom_users_permissions',  # Add a related_name to resolve the clash
-        blank=True,
-        verbose_name='user permissions',
-    )
-
-    class Meta:
-        verbose_name = 'User'
-        verbose_name_plural = 'Users'
-
-    def get_full_name(self):
-        return f'{self.first_name} {self.last_name}'
 
     def get_short_name(self):
         return self.first_name or self.email.split("@")[0]
@@ -124,4 +74,12 @@ class OrderItem(models.Model):
    order = models.ForeignKey(Order, on_delete=models.SET_NULL, null = True, blank=True)
    quantity = models.IntegerField(default=0, null=True,blank=True)
    date_added = models.DateTimeField(auto_now_add=True)
-    
+
+
+
+def create_customer(sender,instance,created,**kwargs):
+    if created:
+        user_customer=Customer(user=instance)
+        user_customer.save()
+
+post_save.connect(create_customer,sender=User)

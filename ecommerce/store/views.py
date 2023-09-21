@@ -8,8 +8,9 @@ from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
-from django.contrib import messages
 from django.shortcuts import redirect
+
+
 # Create your views here.
 
 class Store(ListView):
@@ -69,51 +70,50 @@ class Policy(View):
     def get(self, request):
       return render(request, "store/policy.html", {})
     
+class Account(View):
+    def get(self, request):
+      return render(request, "store/account.html", {})
+    
 
 
 def login_view(request):
-    if request.method == 'POST':
-        email = request.POST['email']
-        password = request.POST['password']
-        user = authenticate(request, email=email, password=password)
-        
-        if user is not None:
-            login(request, user)
-            print('Logowanie udane')
-            return redirect('store')
-        else:
-            print("Logowanie nieudane")
-            return redirect('login')
+    if request.method == "POST":
+       username=request.POST['username']
+       password=request.POST['password']
+       user= authenticate(request, username=username, password=password)
+       if user is not None:
+          login(request, user)
+          return redirect('account')
+       else:
+          return redirect('login')
+    else:
+        return render(request, "store/login.html", {}) 
+    
 
-    return render(request, 'store/login.html')
+def logout_user(request):
+   logout(request)
+   return redirect('login')
 
 def register_view(request):
     if request.method == "POST":
         form = CustomRegistrationForm(request.POST)
         if form.is_valid():
-            email = form.cleaned_data['email']
-            password = form.cleaned_data['password']
+            user = form.save()
+
             first_name = form.cleaned_data['first_name']
             last_name = form.cleaned_data['last_name']
-            
-            # Tworzenie użytkownika i zapis do bazy danych
-            user = User.objects.create_user(
-                email=email,
-                password=password,
-                first_name=first_name,
-                last_name=last_name,
-            )
-            
-            # Autentykacja i logowanie użytkownika
-            user = authenticate(request, email=email, password=password)
-            if user is not None:
-                login(request, user)
-                print('Rejestracja i logowanie udane')
-                return redirect('store')
-            else:
-               print('nieudane')
+            email = form.cleaned_data['email']
 
+
+            customer, created = Customer.objects.get_or_create(user=user)
+            customer.first_name = first_name
+            customer.last_name = last_name
+            customer.email = email
+            customer.save()
+
+            login(request, user)
+            return redirect('account')
     else:
-        form = CustomRegistrationForm()  # Wyświetl pusty formularz rejestracji
+        form = CustomRegistrationForm()
 
-    return render(request, "store/register.html", {'form': form})
+    return render(request, 'store/register.html', {'form': form})

@@ -1,0 +1,14 @@
+{% extends 'store/main.html' %}
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/none_page_marker.css' %}">
+
+{% endblock %}
+
+{% block content %}
+<a href="{% url 'logout' %}" class="shipping-text">Logout</a>
+
+
+
+{% endblock %}

@@ -9,8 +9,8 @@
 {% block content %}
 <form method="POST">
   {% csrf_token %}
-  <label for="email">Email</label>
-  <input class="logininput" name="email" type="email" >
+  <label for="username">Email</label>
+  <input class="logininput" name="username" type="text" >
   <label for="password">Password</label>
   <input class="logininput" name="password" type="password">
   <button>SIGN IN</button>

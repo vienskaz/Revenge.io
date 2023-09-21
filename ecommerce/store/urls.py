@@ -12,5 +12,7 @@ urlpatterns = [
   path('pages/contact', views.Contact.as_view(), name='contact'),
   path('policies/shipping-policy', views.Policy.as_view(), name='policy'),
   path('account/register', views.register_view, name="register"),
-   path('account/login', views.login_view, name="login")
+   path('account/login', views.login_view, name="login"),
+   path('account/logout', views.logout_user, name="logout"),
+   path('account/', views.Account.as_view(), name="account")
 ]
