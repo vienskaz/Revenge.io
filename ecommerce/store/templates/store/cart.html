@@ -1,5 +1,36 @@
 {% extends 'store/main.html' %}
 {% load static %}
 {% block content %}
-  <h>Cart</h>
+<link rel="stylesheet" href="{% static 'css/none_page_marker.css' %}">
+<link rel="stylesheet" href="{% static 'css/item-detail.css' %}">
+<link rel="stylesheet" href="{% static 'css/cart.css' %}">
+<div class="box">
+  <ul>
+      {% for item in items %}
+      <li class="cart-item">
+          <div class="item-image"><img src="{{ item.item.image.url }}" alt="{{ item.item.name }}" id="item-display"></div>
+          <div class="item-details">
+              <p>{{ item.item.name }}</p>
+              <p>Price: {{ item.item.price|floatformat:2 }}&#36;</p>
+              <p>Quantity: {{ item.quantity }}</p>
+              <!-- Display the total for each item -->
+              <div><p>Total: {{ item.get_total }}&#36;</p></div>
+          </div>
+          <button data-item={{item.item.id}} data-action="add" class="update-cart" style="display: flex;">+</button>
+          <button data-item={{item.item.id}} data-action="remove" class="update-cart" style="display: flex;">-</button>
+      </li>
+      {% endfor %}
+  </ul>
+
+
+  <p><strong>Total: {{ order.get_cart_total|floatformat:2 }}&#36;</strong></p>
+  <p><strong>Items: {{ order.get_cart_items }}</strong></p>
+
+  <div id="buttonsholder">
+      <a href="{% url 'checkout' %}" class="back-link"><button id="back">CHECKOUT</button></a>
+      <a href="{% url 'store' %}" class="back-link"><button id="back"><span class="arrow">&#129024;</span>&nbsp; &nbsp;BACK TO SHOP</button></a>
+  </div>
+</div>
+
+
 {% endblock %}

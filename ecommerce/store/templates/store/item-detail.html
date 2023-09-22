@@ -7,6 +7,7 @@
 {% endblock %}
 
 {% block content %}
+
 <div class="grid-wrapper">
   <div class="image">
     <img src="{{ item.image.url }}" alt="{{ item.name }}" id="image-item">
@@ -16,7 +17,7 @@
     <p class="item-price">{{ item.price }}&#36;</p>
     <p class="shipping"><a href="{% url 'policy' %}" class="shipping-text">Shipping</a> calculated at checkout.</p>
 
-    <button>Add to cart</button>
+    <button data-item="{{item.id}}" data-action="add" class="update-cart">Add to cart</button>
     <div class="description-text">
       <p class="bold-header">{{ item.name }}</p>
       <br>
@@ -46,4 +47,7 @@
 <div id="buttonholder">
   <a href="{% url 'store' %}" class="back-link"><button id="back"><span class="arrow">&#129024;</span>&nbsp; &nbsp;BACK TO SHOP</button></a>
 </div>
+
+
+
 {% endblock %}

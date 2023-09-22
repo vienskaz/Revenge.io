@@ -4,15 +4,23 @@
 {% block style %}
 <link rel="stylesheet" href="{% static 'css/none_page_marker.css' %}">
 <link rel="stylesheet" href="{% static 'css/login.css' %}">
+<link rel="stylesheet" href="{% static 'css/item-detail.css' %}">
 {% endblock %}
 
 {% block content %}
+<div id="logincontainer">
+<h2>Login</h2>
 <form method="POST">
   {% csrf_token %}
   <label for="username">Email</label>
   <input class="logininput" name="username" type="text" >
   <label for="password">Password</label>
   <input class="logininput" name="password" type="password">
-  <button>SIGN IN</button>
+  <br>
+  <button id="blackbutton">SIGN IN</button>
 </form>
+<br>
+<a id="registerlink" style="font-weight: 100; font-size: 14px;" href="{% url 'register' %}">Create account </a>
+</div>
+
 {% endblock %}
