@@ -9,7 +9,7 @@ label {
     display: block;
     margin-bottom: 10px;
     width: 500px;
-    margin-left: -100px; /* Przesuń etykiety w lewo o 10 pikseli (możesz dostosować wartość) */
+    margin-left: -100px;
   }
  
 

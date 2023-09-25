@@ -5,16 +5,22 @@
 {% block style %}
 <link rel="stylesheet" href="{% static 'css/none_page_marker.css' %}">
 <link rel="stylesheet" href="{% static 'css/register.css' %}">
+
+
 {% endblock %}
 
 
 {% block content %}
-<form method="POST">
+
+<div id="registerconainer">
+  <h2>Create Account</h2>
+<form method="POST" id="registerform">
   {% csrf_token %}
   {{form.as_p}}
 
-  <button>create</button>
+  <button id="blackbutton">create</button>
 </form>
+</div>
 
 
 {% endblock %}

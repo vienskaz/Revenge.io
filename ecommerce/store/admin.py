@@ -1,8 +1,6 @@
 from django.contrib import admin
 from .models import *
 
-
-from django.contrib.auth.models import User
 class ItemAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
 
@@ -17,19 +15,20 @@ class ItemAdmin(admin.ModelAdmin):
 
     formatted_care_instructions.allow_tags = True
     formatted_care_instructions.short_description = 'Care Instructions'
-class CustomerInlne(admin.StackedInline):
-    model=Customer
+
+class CustomerInline(admin.StackedInline):
+    model = Customer
 
 class UserAdmin(admin.ModelAdmin):
-    model= User
-    fields=["username"]
-    inlines = [CustomerInlne]
+    fields = ["username"]
+    inlines = [CustomerInline]
 
-
-
+# Unregister the default User admin
 admin.site.unregister(User)
-admin.site.register(User,UserAdmin)
-admin.site.register(Item,ItemAdmin)
+
+# Register your custom User admin
+admin.site.register(User, UserAdmin)
+admin.site.register(Item, ItemAdmin)
 admin.site.register(NewsletterUser)
 admin.site.register(Address)
 admin.site.register(Order)

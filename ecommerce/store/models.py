@@ -9,7 +9,7 @@ from django.db.models.signals import post_save
 class Item(models.Model):
   name = models.CharField(max_length=50)
   description = models.TextField(max_length=500)
-  price = models.FloatField() 
+  price = models.DecimalField(max_digits=7, decimal_places=2) 
   image=models.ImageField(upload_to="images", null=True,default="default.jpg")
   care_instructions=models.TextField(max_length=500)
   slug=models.SlugField(unique=True, db_index=True)
@@ -29,7 +29,7 @@ class NewsletterUser(models.Model):
 
 class Customer(models.Model):
     user= models.OneToOneField(User, null=True, on_delete=models.CASCADE)
-    email=models.EmailField(unique=True,default="", blank=True)
+    email=models.EmailField(unique=True,null=True)
     first_name=models.CharField(max_length=50,default="")
     last_name=models.CharField(max_length=50,default="")
     date_joined = models.DateTimeField(default=timezone.now)
@@ -81,7 +81,7 @@ class OrderItem(models.Model):
 
 class Address(models.Model):
     customer= models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True)
-    order=models.ForeignKey(Order, on_delete=models.SET, null=True, blank=True)
+    order=models.ForeignKey(Order, on_delete=models.SET_NULL, null=True, blank=True)
     address = models.CharField(max_length=200, null=True)
     city=models.CharField(max_length=50,null=True  )
     country=models.CharField(max_length=50,null=True  )

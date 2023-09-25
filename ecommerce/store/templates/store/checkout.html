@@ -89,7 +89,7 @@
 		form.addEventListener('submit', function(e){
 	    	e.preventDefault()
 	    	console.log('Form Submitted...')
-	    	document.getElementById('form-button').classList.add("hidden");
+	      document.getElementById('form-button').classList.add("hidden");
 	    	document.getElementById('payment-info').classList.remove("hidden");
 
   })
@@ -127,6 +127,13 @@
     .then((data) => {
       console.log('Success:', data);
       alert('Transaction completed');
+
+      cart = {}
+      document.cookie='carts=' + JSON.stringify(cart) + "domain=;path=/" 
+
+
+
+
       window.location.href = "{% url 'store' %}"
     })
 
@@ -134,9 +141,10 @@
 
     shippingInfo.address = form.address.value
     shippingInfo.city = form.city.value
+    shippingInfo.country = form.country.value
     shippingInfo.state = form.state.value
     shippingInfo.zipcode = form.zipcode.value
-    shippingInfo.country = form.country.value
+   
    
     if(user == 'AnonymousUser'){
       userFormData.name=form.name.value
