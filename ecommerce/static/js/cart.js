@@ -16,31 +16,30 @@
   })
  }
 
- function addCookieItem(itemId, action) {
-  console.log('not logged in');
+ function addCookieItem(itemId, action){
+	console.log('User is not authenticated')
 
-  var cart = JSON.parse(getCookie('cart')) || {};
-  if (action === 'add') {
-    if (typeof cart[itemId] === 'undefined') { 
-      cart[itemId] = { 'quantity': 1 };
-    } else {
-      cart[itemId]['quantity'] += 1;
-    }
-  }
-  if (action === 'remove') {
-    if (typeof cart[itemId] !== 'undefined') {
-      cart[itemId]['quantity'] -= 1;
-      if (cart[itemId]['quantity'] <= 0) {
-        console.log('remove item');
-        delete cart[itemId];
-      }
-    }
-  }
+	if (action == 'add'){
+		if (cart[itemId] == undefined){
+		cart[itemId] = {'quantity':1}
 
-  console.log('Cart:', cart);
+		}else{
+			cart[itemId]['quantity'] += 1
+		}
+	}
 
-  document.cookie = 'cart=' + JSON.stringify(cart) + '; path=/'; 
-  location.reload();
+	if (action == 'remove'){
+		cart[itemId]['quantity'] -= 1
+
+		if (cart[itemId]['quantity'] <= 0){
+			console.log('Item should be deleted')
+			delete cart[itemId];
+		}
+	}
+	console.log('CART:', cart)
+	document.cookie='cart=' + JSON.stringify(cart) + "domain=;path=/";
+	
+	location.reload()
 }
 
 

@@ -180,7 +180,7 @@ def processOrder(request):
         order.save()
 
 
-    Address.objects.create(
+        address=Address.objects.create(
          customer=customer,
          order=order,
          address=data['shipping']['address'],
@@ -188,7 +188,8 @@ def processOrder(request):
          state=data['shipping']['state'],
          zipcode=data['shipping']['zipcode'],
          country=data['shipping']['country']
-      )
+        )
+        address.save()
     
     return JsonResponse('Payment complete', safe=False)
    
