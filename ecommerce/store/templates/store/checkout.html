@@ -130,27 +130,30 @@
   })
 
   function submitFormData(userFormData, shippingInfo) {
-    console.log("payment clicked")
+  console.log("payment clicked")
 
-    var url = '/process_order/'
-    fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json',
-        'X-CSRFTOKEN': csrftoken,
-      },
-      body: JSON.stringify({ 'form': userFormData, 'shipping': shippingInfo })
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log('Success:', data)
-        alert('Transaction completed')
+  var url = '/process_order/';
+  fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-type': 'application/json',
+      'X-CSRFTOKEN': csrftoken,
+    },
+    body: JSON.stringify({ 'form': userFormData, 'shipping': shippingInfo })
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log('Success:', data);
+      alert('Transaction completed');
 
-        cart = {}
-        document.cookie='carts=' + JSON.stringify(cart) + "domain=;path=/" 
-        window.location.href = "{% url 'store' %}"
-      })
-  }
+ 
+      var cart = {};
+      document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/";
+
+      window.location.href = "{% url 'store' %}";
+    });
+}
+
 </script>
 
 

@@ -19,25 +19,25 @@
  function addCookieItem(itemId, action){
 	console.log('User is not authenticated')
 
-	if (action == 'add'){
+	if(action == 'add'){
 		if (cart[itemId] == undefined){
 		cart[itemId] = {'quantity':1}
-
+      
 		}else{
 			cart[itemId]['quantity'] += 1
 		}
 	}
 
-	if (action == 'remove'){
+	if(action == 'remove'){
 		cart[itemId]['quantity'] -= 1
 
-		if (cart[itemId]['quantity'] <= 0){
+		if(cart[itemId]['quantity'] <= 0){
 			console.log('Item should be deleted')
 			delete cart[itemId];
 		}
 	}
-	console.log('CART:', cart)
-	document.cookie='cart=' + JSON.stringify(cart) + "domain=;path=/";
+	console.log('Cart:', cart)
+	document.cookie='cart=' + JSON.stringify(cart) + ";domain=;path=/";
 	
 	location.reload()
 }

@@ -27,7 +27,9 @@
   <p><strong>Items: {{ order.get_cart_items }}</strong></p>
 
   <div id="buttonsholder">
+    {% if order.get_cart_items != 0 %}
       <a href="{% url 'checkout' %}" class="back-link"><button id="back">CHECKOUT</button></a>
+    {% endif %}
       <a href="{% url 'store' %}" class="back-link"><button id="back"><span class="arrow">&#129024;</span>&nbsp; &nbsp;BACK TO SHOP</button></a>
   </div>
 </div>

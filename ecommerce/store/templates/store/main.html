@@ -37,9 +37,9 @@
   </div>
   
   <script type="text/javascript">
-    var user ='{{request.user}}'
+  var user ='{{request.user}}'
 
-    function getToken(name) {
+  function getToken(name) {
     var cookieValue = null;
     if (document.cookie && document.cookie !== '') {
         var cookies = document.cookie.split(';');
@@ -56,13 +56,13 @@
   var csrftoken = getToken('csrftoken');
 
 
-  function getCookie(name){
+function getCookie(name){
   var cookieArr = document.cookie.split(";");
 
-  for (var i = 0; i < cookieArr.length; i++) {
+  for(var i = 0; i < cookieArr.length; i++) {
     var cookiePair = cookieArr[i].split("=");
 
-    if (name == cookiePair[0].trim()) { // Fix the typo here
+    if(name == cookiePair[0].trim()) { 
       return decodeURIComponent(cookiePair[1]);
     }
   }
@@ -71,9 +71,9 @@
 
 var cart = JSON.parse(getCookie('cart'));
 if(cart== undefined){
-  cart={}
+  cart = {}
   console.log('Cart was created')
-  document.cookie='cart='+JSON.stringify(cart)+";domain=;path=/";
+  document.cookie='cart=' + JSON.stringify(cart) + ";domain=;path=/"
   location.reload()
 }
 
