@@ -16,8 +16,25 @@
     <h2 class="item-name">{{ item.name }}</h2>
     <p class="item-price">{{ item.price }}&#36;</p>
     <p class="shipping"><a href="{% url 'policy' %}" class="shipping-text">Shipping</a> calculated at checkout.</p>
-
+    <br>
+    <label for="size">Size:</label>
+  
+  <select name="size" id="size">
+    {% if item.is_accessory != True %}
+    <option value="SMALL">SMALL</option>
+    <option value="MEDIUM">MEDIUM</option>
+    <option value="LARGE">LARGE</option>
+    <option value="XLARGE">XLARGE</option>
+    <option value="XXLARGE">XXLARGE</option>
+    {% else %}
+    <option value="OS">OS</option>
+    {% endif %}
+  </select>
+  <br>
+  <br>
+    
     <button data-item="{{item.id}}" data-action="add" class="update-cart">Add to cart</button>
+    <br>
     <div class="description-text">
       <p class="bold-header">{{ item.name }}</p>
       <br>

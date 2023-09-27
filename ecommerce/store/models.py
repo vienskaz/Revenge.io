@@ -13,6 +13,7 @@ class Item(models.Model):
   image=models.ImageField(upload_to="images", null=True,default="default.jpg")
   care_instructions=models.TextField(max_length=500)
   slug=models.SlugField(unique=True, db_index=True)
+  is_accessory = models.BooleanField(null=True)
 
   def __str__(self):
     return f'{self.name} {self.price}' 
