@@ -1,22 +1,23 @@
- var updateBtns = document.getElementsByClassName('update-cart')
+var updateBtns = document.getElementsByClassName('update-cart');
+var sizeSelect = document.getElementById('size-select');
 
- for (var i=0; i <updateBtns.length;i++){
-  updateBtns[i].addEventListener('click',function(){
-    var itemId=this.dataset.item
-    var action = this.dataset.action
-    console.log('itemId:',itemId, 'action:',action)
+for (var i = 0; i < updateBtns.length; i++) {
+    updateBtns[i].addEventListener('click', function () {
+        var itemId = sizeSelect.value;
+        var action = this.dataset.action;
 
-    console.log('User',user)
-    if(user == 'AnonymousUser'){
-      addCookieItem(itemId, action)
-    }else{
-      updateUserOrder(itemId,action)
-    }
 
-  })
- }
+        console.log('itemId:', itemId, 'action:', action);
 
- function addCookieItem(itemId, action){
+        if (user === 'AnonymousUser') {
+            addCookieItem(itemId, action);
+        } else {
+            updateUserOrder(itemId, action);
+        }
+    });
+}
+
+function addCookieItem(itemId, action){
 	console.log('User is not authenticated')
 
 	if(action == 'add'){
@@ -42,25 +43,23 @@
 	location.reload()
 }
 
+function updateUserOrder(itemId, action) {
+    console.log('User is logged in, sending data');
+    var url = '/update_item/';
 
- function updateUserOrder(itemId, action) {
-  console.log('User is logged in, sending data');
-  var url = '/update_item/';
-
-  fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-CSRFToken': csrftoken,
-    },
-    body: JSON.stringify({ 'itemId': itemId, 'action': action })
-  })
-  .then((response) => {
-    return response.json();
-  })
-  .then((data) => {
-    console.log('data:', data);
-    location.reload();
-
-  });
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken,
+        },
+        body: JSON.stringify({'itemId': itemId, 'action': action})
+    })
+    .then((response) => {
+        return response.json();
+    })
+    .then((data) => {
+        console.log('data:', data);
+        location.reload();
+    });
 }

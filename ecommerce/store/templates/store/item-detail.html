@@ -17,23 +17,20 @@
     <p class="item-price">{{ item.price }}&#36;</p>
     <p class="shipping"><a href="{% url 'policy' %}" class="shipping-text">Shipping</a> calculated at checkout.</p>
     <br>
+    <form method="POST" action="{% url 'update_item' %}">
+      {% csrf_token %}
     <label for="size">Size:</label>
-  
-  <select name="size" id="size">
-    {% if item.is_accessory != True %}
-    <option value="SMALL">SMALL</option>
-    <option value="MEDIUM">MEDIUM</option>
-    <option value="LARGE">LARGE</option>
-    <option value="XLARGE">XLARGE</option>
-    <option value="XXLARGE">XXLARGE</option>
-    {% else %}
-    <option value="OS">OS</option>
-    {% endif %}
-  </select>
+    <select name="size" id="size-select">
+      {% for variant in selected_item_variants %}
+          <option value="{{ variant.id }}">{{ variant.size }}</option>
+      {% endfor %}
+    </select>
   <br>
   <br>
     
-    <button data-item="{{item.id}}" data-action="add" class="update-cart">Add to cart</button>
+    <button data-action="add" class="update-cart">Add to cart</button>
+    <input type="hidden" name="itemId" value="{{ selected_item_variant.id }}">
+    </form>
     <br>
     <div class="description-text">
       <p class="bold-header">{{ item.name }}</p>
@@ -65,6 +62,5 @@
   <a href="{% url 'store' %}" class="back-link"><button id="back"><span class="arrow">&#129024;</span>&nbsp; &nbsp;BACK TO SHOP</button></a>
 </div>
 
-
-
+<h1>{{ selected_item_variant.id }}</h1>
 {% endblock %}

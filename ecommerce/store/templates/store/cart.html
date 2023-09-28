@@ -13,8 +13,9 @@
               <p>{{ item.item.name }}</p>
               <p>Price: {{ item.item.price|floatformat:2 }}&#36;</p>
               <p>Quantity: {{ item.quantity }}</p>
+              <p>Size: {{item.item.size }}</p>
               <!-- Display the total for each item -->
-              <div><p>Total: {{ item.get_total }}&#36;</p></div>
+              <div><p>Total:&#36;</p></div>
           </div>
           <button data-item={{item.item.id}} data-action="add" class="update-cart" style="display: flex;">+</button>
           <button data-item={{item.item.id}} data-action="remove" class="update-cart" style="display: flex;">-</button>
@@ -23,8 +24,8 @@
   </ul>
 
 
-  <p><strong>Total: {{ order.get_cart_total|floatformat:2 }}&#36;</strong></p>
-  <p><strong>Items: {{ order.get_cart_items }}</strong></p>
+  <p><strong>Total:&#36;</strong></p>
+  <p><strong>Items:</strong></p>
 
   <div id="buttonsholder">
     {% if order.get_cart_items != 0 %}

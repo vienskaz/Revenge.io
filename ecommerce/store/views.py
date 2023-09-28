@@ -62,11 +62,37 @@ def checkout(request):
 
 
 class SingleItem(View):
-  def get(self, request, slug):
-    item=Item.objects.get(slug=slug)
-    context={"item":item}
-    return render(request, "store/item-detail.html", context)
-  
+    def get(self, request, slug):
+        try:
+            item = Item.objects.get(slug=slug)
+            unique_sizes = ItemVariant.objects.filter(item=item).values_list('size', flat=True).distinct()
+        except Item.DoesNotExist:
+            item = None
+            unique_sizes = []
+
+        selected_size = request.GET.get('size')
+
+        # Pobierz dostępne warianty na podstawie wybranego rozmiaru
+        selected_item_variants = ItemVariant.objects.all()
+        
+        # Walidacja wyboru rozmiaru
+        if not selected_size or not selected_item_variants.exists():
+            return render(request, "store/item-detail.html", {
+                "item": item,
+                "unique_sizes": unique_sizes,
+                "selected_size": selected_size,
+                "selected_item_variants": selected_item_variants,
+                "error_message": "Proszę wybrać rozmiar przed dodaniem do koszyka."
+            })
+        
+        context = {
+            "item": item,
+            "unique_sizes": unique_sizes,
+            "selected_size": selected_size,
+            "selected_item_variants": selected_item_variants,  # Przekazujemy dostępne warianty
+        }
+        return render(request, "store/item-detail.html", context)
+
 class Media(View):
     def get(self, request):
       return render(request, "store/media.html", {})
@@ -85,7 +111,11 @@ class Policy(View):
     
 class Account(View):
     def get(self, request):
-      return render(request, "store/account.html", {})
+        user = request.user
+        orders = Order.objects.filter(customer__user=user).order_by('-date_ordered')
+        context = {'orders': orders}
+
+        return render(request, "store/account.html", context)
     
 
 
@@ -135,6 +165,7 @@ def register_view(request):
     return render(request, 'store/register.html', {'form': form})
 
 
+
 def updateItem(request):
     data=json.loads(request.body)
     itemId= data['itemId']
@@ -142,7 +173,7 @@ def updateItem(request):
     print('Action:', action)
     print('itemId:', itemId)
     customer = request.user.customer
-    item= Item.objects.get(id=itemId)
+    item= ItemVariant.objects.get(id=itemId)
     order, created= Order.objects.get_or_create(customer=customer, complete=False)
 
     orderItem, created= OrderItem.objects.get_or_create(order=order,item=item)
@@ -170,8 +201,6 @@ def processOrder(request):
     else:
        customer, order = guestOrder(request, data)
 
-
-       
     total= float(data['form']['total'])
     order.transaction_id = transaction_id
 
