@@ -8,7 +8,7 @@ from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect
-from django.http import JsonResponse
+from django.http import JsonResponse,QueryDict
 import json
 import datetime
 from . utils import cookieCart, cartData, guestOrder
@@ -72,10 +72,8 @@ class SingleItem(View):
 
         selected_size = request.GET.get('size')
 
-        # Pobierz dostępne warianty na podstawie wybranego rozmiaru
-        selected_item_variants = ItemVariant.objects.all()
-        
-        # Walidacja wyboru rozmiaru
+  
+        selected_item_variants = ItemVariant.objects.filter(item=item)
         if not selected_size or not selected_item_variants.exists():
             return render(request, "store/item-detail.html", {
                 "item": item,
@@ -89,7 +87,7 @@ class SingleItem(View):
             "item": item,
             "unique_sizes": unique_sizes,
             "selected_size": selected_size,
-            "selected_item_variants": selected_item_variants,  # Przekazujemy dostępne warianty
+            "selected_item_variants": selected_item_variants,  
         }
         return render(request, "store/item-detail.html", context)
 
@@ -165,30 +163,35 @@ def register_view(request):
     return render(request, 'store/register.html', {'form': form})
 
 
-
 def updateItem(request):
-    data=json.loads(request.body)
-    itemId= data['itemId']
-    action=data['action']
-    print('Action:', action)
-    print('itemId:', itemId)
-    customer = request.user.customer
-    item= ItemVariant.objects.get(id=itemId)
-    order, created= Order.objects.get_or_create(customer=customer, complete=False)
+    query_dict = QueryDict(request.body)
+    itemId = query_dict.get('itemId')
+    action = query_dict.get('action')
+    customer = request.user.customer if request.user.is_authenticated else None
 
-    orderItem, created= OrderItem.objects.get_or_create(order=order,item=item)
+    order, created = Order.objects.get_or_create(customer=customer, complete=False)
+    item = ItemVariant.objects.get(id=itemId)
+    orderItem, created = OrderItem.objects.get_or_create(order=order, item=item)
 
-    if action =='add':
-        orderItem.quantity = (orderItem.quantity +1)
+   
+    if action == 'add':
+        orderItem.quantity += 1
     elif action == 'remove':
-       orderItem.quantity = (orderItem.quantity -1)
-
-    orderItem.save()
+        orderItem.quantity -= 1
 
     if orderItem.quantity <= 0:
-       orderItem.delete()
+        orderItem.delete()
+    else:
+        orderItem.save()
 
-    return JsonResponse('Item was added', safe=False)
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+
+
+
+
+
 
 def processOrder(request):
     transaction_id = datetime.datetime.now().timestamp()

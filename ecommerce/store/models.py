@@ -33,6 +33,8 @@ class ItemVariant(models.Model):
    item = models.ForeignKey(Item, on_delete=models.CASCADE)
    size=models.CharField(max_length=7, choices=SIZE_CHOICES,default="OS" ,blank=True, null=True)
    image=models.ImageField(upload_to="images", null=True,default="default.jpg")
+   name = models.CharField(max_length=50, default="None")
+   price = models.DecimalField(max_digits=7, decimal_places=2, default=60) 
   
 
 

@@ -19,8 +19,9 @@
     <br>
     <form method="POST" action="{% url 'update_item' %}">
       {% csrf_token %}
-    <label for="size">Size:</label>
-    <select name="size" id="size-select">
+    
+    <label for="itemId">Size:</label>
+    <select name="itemId" id="size-select">
       {% for variant in selected_item_variants %}
           <option value="{{ variant.id }}">{{ variant.size }}</option>
       {% endfor %}
@@ -28,8 +29,8 @@
   <br>
   <br>
     
-    <button data-action="add" class="update-cart">Add to cart</button>
-    <input type="hidden" name="itemId" value="{{ selected_item_variant.id }}">
+    <button data-action="add" data-item="{{variant.id}}" class="update-cart">Add to cart</button>
+    <input type="hidden" name="action" value="add"> 
     </form>
     <br>
     <div class="description-text">
@@ -62,5 +63,5 @@
   <a href="{% url 'store' %}" class="back-link"><button id="back"><span class="arrow">&#129024;</span>&nbsp; &nbsp;BACK TO SHOP</button></a>
 </div>
 
-<h1>{{ selected_item_variant.id }}</h1>
+
 {% endblock %}

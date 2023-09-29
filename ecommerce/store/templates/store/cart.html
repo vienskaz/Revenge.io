@@ -14,18 +14,17 @@
               <p>Price: {{ item.item.price|floatformat:2 }}&#36;</p>
               <p>Quantity: {{ item.quantity }}</p>
               <p>Size: {{item.item.size }}</p>
-              <!-- Display the total for each item -->
-              <div><p>Total:&#36;</p></div>
+              <div><p>Total: {{ item.get_total }}&#36;</p></div>
           </div>
-          <button data-item={{item.item.id}} data-action="add" class="update-cart" style="display: flex;">+</button>
-          <button data-item={{item.item.id}} data-action="remove" class="update-cart" style="display: flex;">-</button>
+          <button data-item={{item.item.id}} data-action="add" class="update-cart" style="display: flex;">Add</button>
+          <button data-item={{item.item.id}} data-action="remove" class="update-cart" style="display: flex;">Remove</button>
       </li>
       {% endfor %}
   </ul>
 
 
-  <p><strong>Total:&#36;</strong></p>
-  <p><strong>Items:</strong></p>
+  <p><strong>Total: {{ order.get_cart_total|floatformat:2 }}&#36;</strong></p>
+  <p><strong>Items: {{ order.get_cart_items }} </strong></p>
 
   <div id="buttonsholder">
     {% if order.get_cart_items != 0 %}
@@ -34,6 +33,7 @@
       <a href="{% url 'store' %}" class="back-link"><button id="back"><span class="arrow">&#129024;</span>&nbsp; &nbsp;BACK TO SHOP</button></a>
   </div>
 </div>
-
+<select id="size-select" hidden>
+</select>
 
 {% endblock %}
