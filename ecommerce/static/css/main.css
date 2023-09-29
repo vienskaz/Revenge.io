@@ -1,3 +1,7 @@
+* {
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
 .up-container {
   display: flex;
   justify-content: space-between;
@@ -48,7 +52,6 @@ i {
   display: flex;
   align-items: center;
   font-weight: bold;
-  font-family: 'Roboto Condensed', sans-serif;
   color: black;
   font-size: 14px;
   margin-right: 600px;
@@ -61,7 +64,6 @@ i {
 }
 
 a {
-  font-family: 'Roboto Condensed', sans-serif;
   color: black;
   text-decoration: none;
   font-weight: bold;
@@ -78,7 +80,7 @@ p {
 }
 
 #member-button {
-  font-family: 'Roboto Condensed', sans-serif;
+  
   color: white;
   font-size: 12px;
   background-color: black;

@@ -88,7 +88,7 @@ class SingleItem(View):
                 "unique_sizes": unique_sizes,
                 "selected_size": selected_size,
                 "selected_item_variants": selected_item_variants,
-                "error_message": "Proszę wybrać rozmiar przed dodaniem do koszyka."
+                "error_message": "Choose proper size."
             })
         
         context = {
@@ -102,12 +102,12 @@ class SingleItem(View):
 class Media(View):
     def get(self, request):
         newsletter_form = NewsletterForm() 
-        return render(request, "store/contact.html", {'newsletter_form': newsletter_form})
+        return render(request, "store/media.html", {'newsletter_form': newsletter_form})
 
 class Info(View):
     def get(self, request):
         newsletter_form = NewsletterForm() 
-        return render(request, "store/contact.html", {'newsletter_form': newsletter_form})
+        return render(request, "store/info.html", {'newsletter_form': newsletter_form})
     
 class Contact(View):
    def get(self, request):
@@ -117,7 +117,7 @@ class Contact(View):
 class Policy(View):
     def get(self, request):
         newsletter_form = NewsletterForm()  
-        return render(request, "store/contact.html", {'newsletter_form': newsletter_form})
+        return render(request, "store/policy.html", {'newsletter_form': newsletter_form})
     
 class Account(View):
     def get(self, request):
@@ -155,7 +155,7 @@ def logout_user(request):
 def register_view(request):
     if request.method == "POST":
         form = CustomRegistrationForm(request.POST)
-        newsletter_form = NewsletterForm(request.POST)  # Tworzy instancję NewsletterForm na podstawie danych POST
+        newsletter_form = NewsletterForm(request.POST)  
 
         if form.is_valid() and newsletter_form.is_valid():
             user = form.save()
@@ -170,15 +170,15 @@ def register_view(request):
             customer.email = email
             customer.save()
 
-            # Zapisz dane z formularza newslettera
+        
             newsletter_email = newsletter_form.cleaned_data['email']
-            # Tu możesz zapisać email do subskrypcji newslettera w odpowiedniej tabeli lub miejscu
+          
 
             login(request, user)
             return redirect('account')
     else:
         form = CustomRegistrationForm()
-        newsletter_form = NewsletterForm()  # Tworzy pusty formularz NewsletterForm
+        newsletter_form = NewsletterForm()  
 
     return render(request, 'store/register.html', {'form': form, 'newsletter_form': newsletter_form})
 

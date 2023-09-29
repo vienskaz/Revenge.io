@@ -1,3 +1,8 @@
+* {
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+
 .item p {
   margin-top: 0; 
 }
@@ -26,14 +31,12 @@ img{
 }
 
 a {
-  font-family: 'Roboto Condensed', sans-serif;
   color: black;
   text-decoration: none;
   margin-left: 14px;
 }
 
 #name {
-  font-family: 'Roboto Condensed', sans-serif;
   font-size: 14px;
   margin-top: 10px; 
   font-weight: 400;

@@ -27,7 +27,11 @@
     </div>
   
     <div id="icons">
+      {% if user.is_authenticated %}
+      <a href="{% url 'account' %}"><i class="fa-regular fa-user" style="color: #000000;"></i></a>
+      {% else %}
       <a href="{% url 'login' %}"><i class="fa-regular fa-user" style="color: #000000;"></i></a>
+      {% endif %}
       <a href="{% url 'cart' %}"><i class="fa-solid fa-cart-shopping" style="color: #000000;"></i></a>
     </div>
   </div>
@@ -110,8 +114,8 @@ console.log('Cart:', cart);
   <footer>
     <div class="bot-container">
       <div class="bot-icons">
-        <a href="https://www.instagram.com/revenge/" target="_blank"><i class="fa-brands fa-twitter" style="color: #000000; font-size: 26px;"></i></a>
-        <a href="https://twitter.com/garetterevenge" target="_blank"><i class="fa-brands fa-instagram" style="color: #000000; font-size: 26px;"></i></a>
+        <a href="https://twitter.com/garetterevenge"  target="_blank"><i class="fa-brands fa-twitter" style="color: #000000; font-size: 26px;"></i></a>
+        <a href="https://www.instagram.com/revenge/" target="_blank"><i class="fa-brands fa-instagram" style="color: #000000; font-size: 26px;"></i></a>
         <p><a href="{% url 'info' %}">INFO</a></p>
         <p><a href="{% url 'contact' %}">CONTACT</a></p>
       </div>

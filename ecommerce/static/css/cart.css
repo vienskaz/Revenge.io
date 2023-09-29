@@ -1,16 +1,61 @@
-#item-display{
-  width: 100px;
-  height:auto;
+* {
+  font-family: 'Roboto Condensed', sans-serif;
 }
+
+
 .cart-item {
-  border: 1px solid #000; 
-  margin-bottom: 10px; 
-  padding: 10px; 
+  display: flex; /* Ustaw elementy listy jako flex container */
+  border: 1px solid #000;
+  margin-bottom: 10px;
+  padding: 10px;
+  align-items: center; /* Wyśrodkuj elementy w pionie */
 }
+
+.cart-item img {
+  width: 100px;
+  height: auto;
+  margin-right: 10px; /* Dodaj odstęp między obrazkiem a tekstem */
+}
+
+.item-details {
+  flex: 1; /* Rozszerz item-details, aby zajmował dostępną przestrzeń */
+}
+
 ul {
   list-style-type: none;
 }
 
 .hidden {
   display: none;
+}
+
+#checkout {
+  width: 150px;
+  padding-left: 45px;
+}
+
+.update-cart {
+  width: 120px;
+  margin-bottom: 3px;
+  text-align: center;
+  margin-left: -1px; /* Dodaj odstęp po prawej stronie przycisków */
+}
+
+#button-item-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Wyśrodkuj przyciski w pionie */
+  margin-left: auto; /* Przesuń przyciski w kierunku opisów (w lewo) */
+}
+
+/* Zmniejsz odstęp między przyciskami a elementami p */
+#button-item-container .update-cart {
+  margin-top: 3px; /* Dodaj odstęp między przyciskami a elementami p */
+  margin-bottom: 3px; /* Dodaj odstęp na dole przycisków */
+}
+
+p {
+  margin-right: 2px;
+  font-family: 'Roboto Condensed', sans-serif;
+  padding-right: 1px;
 }

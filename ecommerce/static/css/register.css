@@ -1,5 +1,8 @@
-#blackbutton {
+* {
   font-family: 'Roboto Condensed', sans-serif;
+}
+
+#blackbutton {
   color: white;
   font-size: 14px;
   background-color: black;
@@ -30,7 +33,6 @@ label {
   padding-bottom: 100px;
 }
 h2{
-  font-family: 'Roboto Condensed', sans-serif;
   margin-left: 70px;
   font-size: 30px;
 }

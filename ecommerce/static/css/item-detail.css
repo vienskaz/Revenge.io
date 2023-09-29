@@ -6,7 +6,7 @@
 }
 
 .gray, h3 {
-  font-family: 'Roboto Condensed', sans-serif;
+
   color: rgb(168, 168, 168);
   font-size: 14px;
 }
@@ -31,17 +31,17 @@ button {
 }
 
 .arrow {
-  margin-left: auto; /* Push the span to the right (adjust margin as needed) */
-  padding-right: 10px; /* Add some space between the text and the arrow */
+  margin-left: auto; 
+  padding-right: 10px; 
   font-size: 20px;
 }
 
 #buttonholder {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center horizontally */
-  justify-content: center; /* Center vertically */
-  height: 100%; /* Height of the parent container */
+  align-items: center; 
+  justify-content: center;
+  height: 100%; 
 }
 
 #image-item {
@@ -50,12 +50,12 @@ button {
 }
 
 .item-name {
-  font-family: 'Roboto Condensed';
+
   font-size: 25px;
 }
 
 .item-price,.bold-header {
-  font-family: 'Roboto Condensed';
+
   font-weight: bold;
   font-size: 14px;
 }
@@ -64,7 +64,6 @@ button {
 }
 
 .shipping-text,.shipping{
-  font-family: 'Roboto Condensed';
   font-size: 12px;
 }
 .shipping-text{
@@ -81,4 +80,11 @@ button {
 .care,.disclamier,.attention{
   margin-bottom: 40px;
   margin-top: 40px;
+}
+
+
+#size-select{
+  width: 300px;
+
+  height: 50px;
 }

@@ -3,21 +3,39 @@
 
 {% block style %}
 <link rel="stylesheet" href="{% static 'css/none_page_marker.css' %}">
-
+<link rel="stylesheet" href="{% static 'css/account.css' %}">
 {% endblock %}
 
 {% block content %}
 <div>
-
-  <div id="orders">
+  
+  <div id="logout">
     <a href="{% url 'logout' %}" class="shipping-text">Logout</a>
   </div>
-
-  </div id="addresses">
-
-
-
+  <br>
+  <br>
+  <div id="order-container">
+    <h1>Your orders:</h1>
+    <ul>
+    {% for order in orders %}
+    <li id="orders">
+      <p>Order Number: {{ order.id }}</p>
+      <p>Date Ordered: {{ order.date_ordered }}</p>
+      <p>Transaction ID: {{ order.transaction_id }}</p>
+      <p>Total: {{ order.get_cart_total }}$</p>
+    </li>
+    {% endfor %}
+    </ul>
   </div>
+
+
+
+
+
+
+
+
+
 </div>
 
 
