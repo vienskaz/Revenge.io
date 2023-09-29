@@ -1,0 +1,26 @@
+* {
+  font-family: 'Roboto Condensed', sans-serif;
+}
+#logout{
+  text-align: center;
+  padding-right: 90px;
+  padding-top: 50px;
+}
+
+
+#orders {
+  display: block; /* Ustaw jako bloki */
+  width: 300px;
+  border: 1px solid #000;
+  margin: 0 auto; /* Ustaw marginesy poziome na "auto" */
+  margin-bottom: 10px;
+  padding: 10px;
+}
+ul {
+  list-style-type: none;
+}
+
+#order-container{
+  text-align: center;
+  padding-right: 60px;
+}
