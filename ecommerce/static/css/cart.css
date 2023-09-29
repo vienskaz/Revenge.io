@@ -1,8 +1,3 @@
-* {
-  font-family: 'Roboto Condensed', sans-serif;
-}
-
-
 .cart-item {
   display: flex; /* Ustaw elementy listy jako flex container */
   border: 1px solid #000;
@@ -51,7 +46,9 @@ ul {
 /* Zmniejsz odstęp między przyciskami a elementami p */
 #button-item-container .update-cart {
   margin-top: 3px; /* Dodaj odstęp między przyciskami a elementami p */
-  margin-bottom: 3px; /* Dodaj odstęp na dole przycisków */
+  margin-bottom: 3px;
+  margin-right: 3px;
+  margin-left: 3px; /* Dodaj odstęp na dole przycisków */
 }
 
 p {
