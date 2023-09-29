@@ -3,7 +3,7 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/none_page_marker.css' %}">
 <link rel="stylesheet" href="{% static 'css/item-detail.css' %}">
-<link rel="stylesheet" href="{% static 'css/cart.css' %}">
+<link rel="stylesheet" href="{% static 'css/checkout.css' %}">
 <div class="row">
   <div class="col-lg-6">
     <div class="box-element" id="form-wrapper">
@@ -58,10 +58,11 @@
       <hr>
       {% for item in items %}
       <div class="cart-row">
-        <div class="item-image"><img src="{{ item.item.image.url }}" alt="{{ item.item.name }}" id="item-display"></div>
-        <div style="flex:2"><p>{{item.item.name}}</p></div>
-        <div style="flex:1"><p>{{item.item.price|floatformat:2}}&#36;</p></div>
-        <div style="flex:1"><p>x{{item.quantity}}</p></div>
+        <img src="{{ item.item.image.url }}" alt="{{ item.item.name }}" id="item-display">
+        <p>{{item.item.name}}</p>
+        <p>{{item.item.price|floatformat:2}}&#36;</p>
+        <p>Quantity: {{item.quantity}}</p>
+        <p>Size: {{item.item.size}}</p>
       </div>
       {% endfor %}
       <h5>Items: {{order.get_cart_items}}</h5>

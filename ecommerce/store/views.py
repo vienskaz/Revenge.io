@@ -184,8 +184,6 @@ def register_view(request):
 
 
 def updateItem(request):
-
-    
     if request.user.is_authenticated:
         customer = request.user.customer
         data=json.loads(request.body)
@@ -214,12 +212,9 @@ def updateItem(request):
         itemId = query_dict.get('itemId')
         action = query_dict.get('action')
         customer = request.user.customer if request.user.is_authenticated else None
-
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         item = ItemVariant.objects.get(id=itemId)
         orderItem, created = OrderItem.objects.get_or_create(order=order, item=item)
-
-   
         if action == 'add':
             orderItem.quantity += 1
         elif action == 'remove':
