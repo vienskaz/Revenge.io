@@ -184,27 +184,53 @@ def register_view(request):
 
 
 def updateItem(request):
-    query_dict = QueryDict(request.body)
-    itemId = query_dict.get('itemId')
-    action = query_dict.get('action')
-    customer = request.user.customer if request.user.is_authenticated else None
 
-    order, created = Order.objects.get_or_create(customer=customer, complete=False)
-    item = ItemVariant.objects.get(id=itemId)
-    orderItem, created = OrderItem.objects.get_or_create(order=order, item=item)
+    
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        data=json.loads(request.body)
+        itemId= data['itemId']
+        action=data['action']
+        print('Action:', action)
+        print('itemId:', itemId)
+        item= ItemVariant.objects.get(id=itemId)
+        order, created= Order.objects.get_or_create(customer=customer, complete=False)
 
-   
-    if action == 'add':
-        orderItem.quantity += 1
-    elif action == 'remove':
-        orderItem.quantity -= 1
+        orderItem, created= OrderItem.objects.get_or_create(order=order,item=item)
 
-    if orderItem.quantity <= 0:
-        orderItem.delete()
-    else:
+        if action =='add':
+            orderItem.quantity = (orderItem.quantity +1)
+        elif action == 'remove':
+            orderItem.quantity = (orderItem.quantity -1)
+
         orderItem.save()
 
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        if orderItem.quantity <= 0:
+            orderItem.delete()
+
+        return JsonResponse('Item was added', safe=False)
+    else:
+        query_dict = QueryDict(request.body)
+        itemId = query_dict.get('itemId')
+        action = query_dict.get('action')
+        customer = request.user.customer if request.user.is_authenticated else None
+
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        item = ItemVariant.objects.get(id=itemId)
+        orderItem, created = OrderItem.objects.get_or_create(order=order, item=item)
+
+   
+        if action == 'add':
+            orderItem.quantity += 1
+        elif action == 'remove':
+            orderItem.quantity -= 1
+
+        if orderItem.quantity <= 0:
+            orderItem.delete()
+        else:
+            orderItem.save()
+
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 

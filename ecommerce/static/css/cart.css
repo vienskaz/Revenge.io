@@ -1,19 +1,19 @@
 .cart-item {
-  display: flex; /* Ustaw elementy listy jako flex container */
+  display: flex; 
   border: 1px solid #000;
   margin-bottom: 10px;
   padding: 10px;
-  align-items: center; /* Wyśrodkuj elementy w pionie */
+  align-items: center; 
 }
 
 .cart-item img {
   width: 100px;
   height: auto;
-  margin-right: 10px; /* Dodaj odstęp między obrazkiem a tekstem */
+  margin-right: 10px; 
 }
 
 .item-details {
-  flex: 1; /* Rozszerz item-details, aby zajmował dostępną przestrzeń */
+  flex: 1; 
 }
 
 ul {
@@ -32,27 +32,31 @@ ul {
 .update-cart {
   width: 120px;
   margin-bottom: 3px;
-  text-align: center;
-  margin-left: -1px; /* Dodaj odstęp po prawej stronie przycisków */
+  margin-left: -1px; 
 }
 
 #button-item-container {
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* Wyśrodkuj przyciski w pionie */
-  margin-left: auto; /* Przesuń przyciski w kierunku opisów (w lewo) */
+  align-items: flex-start; 
+  margin-left: auto; 
+  text-align: center;
 }
 
-/* Zmniejsz odstęp między przyciskami a elementami p */
+
 #button-item-container .update-cart {
-  margin-top: 3px; /* Dodaj odstęp między przyciskami a elementami p */
+  margin-top: 3px; 
   margin-bottom: 3px;
   margin-right: 3px;
-  margin-left: 3px; /* Dodaj odstęp na dole przycisków */
+  margin-left: 3px; 
 }
 
 p {
   margin-right: 2px;
   font-family: 'Roboto Condensed', sans-serif;
   padding-right: 1px;
+}
+
+.update-cart{
+  margin-left: 5px;
 }
