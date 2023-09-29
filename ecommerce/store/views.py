@@ -11,32 +11,40 @@ from django.shortcuts import redirect
 from django.http import JsonResponse,QueryDict
 import json
 import datetime
-from . utils import cookieCart, cartData, guestOrder
+from . utils import cartData, guestOrder
 from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 
+def subscribe_to_newsletter(request):
+    if request.method == "POST":
+        entered_email = request.POST.get('customer_posted', '').strip()
+
+        if not entered_email:
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        
+        try:
+            validate_email(entered_email)
+        except ValidationError:
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        
+        if NewsletterUser.objects.filter(email=entered_email).exists():
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        
+        newsletteruser = NewsletterUser(email=entered_email)
+        newsletteruser.save()
+
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    
 class Store(ListView):
   model = Item
   template_name = "store/store.html"
   context_object_name = "all_items"
 
-  def post(self, request):
-    entered_email = request.POST.get('customer_posted', '').strip()
+  def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['newsletter_form'] = NewsletterForm()  # You need to create this form
+        return context
 
-    if not entered_email:
-        return HttpResponseRedirect("/")
-    try:
-        validate_email(entered_email)
-    except ValidationError:
-        return HttpResponseRedirect("/")
-
-    if NewsletterUser.objects.filter(email=entered_email).exists():
-        return HttpResponseRedirect("/")
-
-    newsletteruser = NewsletterUser(email=entered_email)
-    newsletteruser.save()
-
-    return HttpResponseRedirect("/")
 
   
 def cart(request):
@@ -44,19 +52,19 @@ def cart(request):
     cartItems = data['cartItems']
     order = data['order']
     items = data['items']
-       
-    context = {'items':items, 'order':order}
+    newsletter_form = NewsletterForm()   
+    context = {'items':items, 'order':order, 'newsletter_form': newsletter_form}
     return render(request, 'store/cart.html', context)
 
 @csrf_exempt  
 def checkout(request):
-
+    newsletter_form = NewsletterForm() 
     data=cartData(request)
     cartItems = data['cartItems']
     order = data['order']
     items = data['items']
        
-    context = {'items':items, 'order':order, 'cartItems':cartItems}
+    context = {'items':items, 'order':order, 'cartItems':cartItems,'newsletter_form': newsletter_form}
     return render(request, 'store/checkout.html', context)
 
 
@@ -93,31 +101,37 @@ class SingleItem(View):
 
 class Media(View):
     def get(self, request):
-      return render(request, "store/media.html", {})
+        newsletter_form = NewsletterForm() 
+        return render(request, "store/contact.html", {'newsletter_form': newsletter_form})
 
 class Info(View):
     def get(self, request):
-      return render(request, "store/info.html", {})
+        newsletter_form = NewsletterForm() 
+        return render(request, "store/contact.html", {'newsletter_form': newsletter_form})
     
 class Contact(View):
-    def get(self, request):
-      return render(request, "store/contact.html", {})
+   def get(self, request):
+        newsletter_form = NewsletterForm()  
+        return render(request, "store/contact.html", {'newsletter_form': newsletter_form})
     
 class Policy(View):
     def get(self, request):
-      return render(request, "store/policy.html", {})
+        newsletter_form = NewsletterForm()  
+        return render(request, "store/contact.html", {'newsletter_form': newsletter_form})
     
 class Account(View):
     def get(self, request):
         user = request.user
+        newsletter_form = NewsletterForm() 
         orders = Order.objects.filter(customer__user=user).order_by('-date_ordered')
-        context = {'orders': orders}
+        context = {'orders': orders, 'newsletter_form': newsletter_form}
 
         return render(request, "store/account.html", context)
     
 
 
 def login_view(request):
+    newsletter_form = NewsletterForm() 
     if not request.user.is_authenticated:
         if request.method == "POST":
            username=request.POST['username']
@@ -129,9 +143,9 @@ def login_view(request):
            else:
               return redirect('login')
         else:
-            return render(request, "store/login.html", {}) 
+            return render(request, "store/login.html", {'newsletter_form': newsletter_form}) 
     else:
-       return render(request, "store/account.html", {}) 
+       return render(request, "store/account.html", {'newsletter_form': newsletter_form}) 
     
 
 def logout_user(request):
@@ -141,13 +155,14 @@ def logout_user(request):
 def register_view(request):
     if request.method == "POST":
         form = CustomRegistrationForm(request.POST)
-        if form.is_valid():
+        newsletter_form = NewsletterForm(request.POST)  # Tworzy instancję NewsletterForm na podstawie danych POST
+
+        if form.is_valid() and newsletter_form.is_valid():
             user = form.save()
 
             first_name = form.cleaned_data['first_name']
             last_name = form.cleaned_data['last_name']
             email = form.cleaned_data['email']
-
 
             customer, created = Customer.objects.get_or_create(user=user)
             customer.first_name = first_name
@@ -155,12 +170,17 @@ def register_view(request):
             customer.email = email
             customer.save()
 
+            # Zapisz dane z formularza newslettera
+            newsletter_email = newsletter_form.cleaned_data['email']
+            # Tu możesz zapisać email do subskrypcji newslettera w odpowiedniej tabeli lub miejscu
+
             login(request, user)
             return redirect('account')
     else:
         form = CustomRegistrationForm()
+        newsletter_form = NewsletterForm()  # Tworzy pusty formularz NewsletterForm
 
-    return render(request, 'store/register.html', {'form': form})
+    return render(request, 'store/register.html', {'form': form, 'newsletter_form': newsletter_form})
 
 
 def updateItem(request):
@@ -185,11 +205,6 @@ def updateItem(request):
         orderItem.save()
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-
-
-
-
-
 
 
 

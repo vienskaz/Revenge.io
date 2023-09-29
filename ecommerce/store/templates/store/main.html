@@ -38,6 +38,7 @@
   
   <script type="text/javascript">
   var user ='{{request.user}}'
+  
 
   function getToken(name) {
     var cookieValue = null;
@@ -67,7 +68,14 @@ function getCookie(name){
     }
   }
   return null;
+
 }
+
+
+
+
+
+
 
 var cart = JSON.parse(getCookie('cart'));
 if(cart== undefined){
@@ -78,6 +86,16 @@ if(cart== undefined){
 }
 
 console.log('Cart:', cart);
+
+
+
+
+
+
+
+
+
+
 
 
 </script>
@@ -99,11 +117,11 @@ console.log('Cart:', cart);
       </div>
 
       <div id="emailsub">
-        <form id="newsletter" method="POST">
+        <form id="newsletter" method="POST" action="{% url 'subscribe_to_newsletter' %}">
           {% csrf_token %}
         <input action="/" id="newsletterinput" name="customer_posted" type="email" placeholder="Email address">
         <button id="member-button">BECOME A MEMBER</button>
-        <form>
+        </form>
       </div>
     </div>
   </footer>

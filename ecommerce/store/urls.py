@@ -16,6 +16,7 @@ urlpatterns = [
    path('account/logout', views.logout_user, name="logout"),
    path('account/', views.Account.as_view(), name="account"),
    path('update_item/', views.updateItem, name='update_item'),
-   path('process_order/', views.processOrder, name='process_order')
+   path('process_order/', views.processOrder, name='process_order'),
+   path('subscribe_to_newsletter/', views.subscribe_to_newsletter, name='subscribe_to_newsletter')
 
 ]
