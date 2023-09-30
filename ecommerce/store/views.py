@@ -75,8 +75,7 @@ class SingleItem(View):
             item = Item.objects.get(slug=slug)
             unique_sizes = ItemVariant.objects.filter(item=item).values_list('size', flat=True).distinct()
         except Item.DoesNotExist:
-            item = None
-            unique_sizes = []
+            return HttpResponseRedirect('/')
 
         selected_size = request.GET.get('size')
 
