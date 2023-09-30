@@ -1,3 +1,70 @@
+
+
 * {
   font-family: 'Roboto Condensed', sans-serif;
+}
+
+.hidden {
+  display: none;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.box-element {
+  background-color: #f2f2f2;
+  padding: 20px;
+  width: 45%; 
+  margin-bottom: 10px;
+}
+
+.form-field {
+  margin-bottom: 10px;
+}
+
+#form-button {
+  background-color: black;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+#form-button.hidden {
+  display: none;
+}
+
+
+
+#make-payment {
+  background-color: black;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.cart-container {
+  flex: 1; 
+  margin-left: 20px; 
+}
+.cart-row {
+  display: flex;
+  flex-direction: column; 
+  margin-bottom: 10px;
+  border: 1px solid #ddd; 
+  padding: 10px;
+}
+
+#item-display {
+  max-width: 100px;
+  margin-right: 10px;
+}
+
+
+.center-button {
+  margin-top: 20px; 
 }

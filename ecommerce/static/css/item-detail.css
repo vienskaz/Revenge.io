@@ -2,7 +2,7 @@
   margin-top: 100px;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  align-items: center; /* Center items vertically within the grid */
+  align-items: center; 
 }
 
 .gray, h3 {
@@ -21,13 +21,13 @@ h3 {
 }
 
 button {
-  padding: 12px 20px; /* Adjust padding as needed */
+  padding: 12px 20px; 
   border-color: black;
   border-width: thin;
   background-color: white;
   font-size: 12px;
-  display: flex; /* Use flexbox to align content horizontally */
-  align-items: center; /* Center vertically */
+  display: flex; 
+  align-items: center; 
 }
 
 .arrow {

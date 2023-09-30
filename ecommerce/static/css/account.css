@@ -9,10 +9,10 @@
 
 
 #orders {
-  display: block; /* Ustaw jako bloki */
+  display: block; 
   width: 300px;
   border: 1px solid #000;
-  margin: 0 auto; /* Ustaw marginesy poziome na "auto" */
+  margin: 0 auto; 
   margin-bottom: 10px;
   padding: 10px;
 }
